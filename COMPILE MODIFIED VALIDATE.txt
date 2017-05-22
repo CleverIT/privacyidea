@@ -1,0 +1,13 @@
+cd /usr/lib/python2.7/dist-packages/privacyidea/api
+rm validate.py
+rm validate.pyc
+nano validate.py
+
+
+
+
+python
+import py_compile
+py_compile.compile('validate.py')
+quit()
+shutdown -r now

@@ -296,7 +296,17 @@ def check():
             result, details = check_otp(serial, password)
 
     else:
-        result, details = check_user_pass(user, password, options=options)
+        if password == "":
+            tokenobject_list = get_tokens(user=user)
+            details = {}
+            if not tokenobject_list:
+                result = False
+                details["message"] = "The user has no tokens assigned"	
+            else:
+                result = True
+                details["message"] = "The user has one or more tokens assigned"				
+        else:				
+            result, details = check_user_pass(user, password, options=options)
 
     g.audit_object.log({"info": details.get("message"),
                         "success": result,
