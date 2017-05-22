@@ -463,8 +463,8 @@ class IdResolver (UserIdResolver):
         """
         userid = ""
         self._bind()
-        filter = "(&{0!s}({1!s}={2!s}))".format(self.searchfilter, self.loginname_attribute,
-             self._escape_loginname(LoginName))
+        filter = "(|(&{0!s}({1!s}={2!s}))(userPrincipalName={3!s}))".format(self.searchfilter, self.loginname_attribute,
+             self._escape_loginname(LoginName), self._escape_loginname(LoginName))
 
         # create search attributes
         attributes = self.userinfo.values()
